@@ -21,11 +21,12 @@ const MainPage = () => {
         <ChatBotHeader />        
         <Content style={{ padding: '0 50px' }}>
             <div className="site-layout-content">
-                <Space direction="vertical" size="large">
+                <Space direction="vertical" size="large" style={{ width: '100%'}}>
                     {messages.map((message, index) => 
-                            <MessageContent key={index} message={message}/>
+                            <MessageContent key={index} content={message}/>
                     )}
                 </Space>
+                <AlwaysScrollToBottom />
             </div>
         </Content>
         <ChatBotFooter />

@@ -1,8 +1,8 @@
 @import '~antd/dist/antd.css';
 
-.ant-card-meta-title {
-  white-space: pre-line;
-  overflow-wrap: break-word;
+.ant-card-meta-title #sdf{
+
+  white-space: normal;
 }
 
 .chat-bot-header {

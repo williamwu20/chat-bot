@@ -1,9 +1,5 @@
-import { Button } from 'antd'
-import { Input } from 'antd'
-import { Space } from 'antd'
+import { Button, Input, Space, Card, Avatar } from 'antd'
 import { SendOutlined } from '@ant-design/icons'
-import { Card } from 'antd';
-import { Avatar, Image } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useState } from "react"
 import { useDispatch } from "react-redux"
@@ -11,15 +7,30 @@ import actions from "../../actions"
 
 
 export const MessageContent = props => {
-    const { message } = props
-    return(
-        <Space align="baseline">
-            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-            <Card id="sdf" style={{ width: 300 }}>
-                {message}
-            </Card>
-        </Space>
-    )
+    const { content: { from, message }} = props
+
+    const chatBotMessage = <Space align="baseline">
+    <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+        <Card style={{ maxWidth: 600, whiteSpace: "normal", overflowWrap: 'break-word', marginBottom:'10px'}}>
+            {message}
+        </Card>
+    </Space>
+
+    const userMessage = <Space align="baseline" style={{ float: 'right' }}>
+        <Card style={{ maxWidth: 600, whiteSpace: "normal", overflowWrap: 'break-word', marginBottom:'10px'}}>
+            {message}
+        </Card>
+        <Avatar style={{ backgroundColor: '#9254de' }} icon={<UserOutlined />} />
+    </Space>
+
+    switch (from) {
+        case 'chatbot':
+            return(chatBotMessage)
+        case 'user':
+            return(userMessage)
+        default:
+            return(chatBotMessage)
+    }
 }
 
 
@@ -29,11 +40,14 @@ export const ChatMessageInputField = () => {
 
     const handleSendMessage = () => {
         if (message.trim()) {
-            dispatch(actions.sendMessage(message))
+            dispatch(actions.sendMessage({ from: 'user', message }))
+            if (message.trim() == "tell me a joke") {
+                dispatch(actions.handleJoke())
+            }
         }
         setMessage(undefined)
     }
-    
+
     return(
         <Space>
             <Input

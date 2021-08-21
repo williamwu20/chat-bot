@@ -13,7 +13,7 @@ export const ChatBotHeader = () =>
       title="Chat Bot"
       subTitle="Interact with the chat bot"
       extra={[
-        <Button key="1">GitHub</Button>,
+        <Button key="1" href="https://github.com/williamwu20/chat-bot" target="_blank">GitHub</Button>,
       ]}
     />
   </div>
