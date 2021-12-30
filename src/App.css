@@ -1,8 +1,7 @@
 @import '~antd/dist/antd.css';
 
-.ant-card-meta-title #sdf{
-
-  white-space: normal;
+* {
+  scroll-margin-bottom: 100px;
 }
 
 .chat-bot-header {
